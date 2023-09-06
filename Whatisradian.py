@@ -4,7 +4,7 @@ from manim import *
 class WhatIsRadian(Scene):
   def construct(self):
     #intro text
-    text1 = Text("Radian?").scale(2)
+    text1 = Text("What is a Radian?").scale(1.5)
     dot = Dot().scale(0.2)
     self.play(Write(text1))
     self.wait(2)
@@ -36,7 +36,13 @@ class WhatIsRadian(Scene):
         mobj.set_value(ang)
         mobj.next_to(angle, UR)
 
-    value_num.add_updater(valnumUpdater) 
+    value_num.add_updater(valnumUpdater)
+    
+    #adding text about angle
+    text2 = Text("angle?").scale(1.5)
+    self.play(Write(text2))
+    self.play(text2.animate.to_edge(UL, buff = 0.8))
+    self.play(Transform(text2, Text("Angle:").scale(1.5).to_edge(UL, buff=0.8)))
     
     
     # adding lines, angle, dot, value_num and rotate line1
@@ -47,4 +53,5 @@ class WhatIsRadian(Scene):
     self.play(FadeIn(value_num), run_time=1)
     self.play(Rotate(line1,PI/4, about_point=ORIGIN), run_time=2)
     self.play(Rotate(line1,PI/2, about_point=ORIGIN), run_time=2)
+    
     self.wait(3) 
