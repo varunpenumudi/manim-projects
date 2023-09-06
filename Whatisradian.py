@@ -5,9 +5,17 @@ class WhatIsRadian(Scene):
   def construct(self):
     #intro text
     quote_text = Text("""
-    \"Degrees are the familiar footsteps we take on the path of measurement, while radians are the hidden jewels revealing the circle's true essence.\"                             - Unknown
+    \"Degrees are the familiar footsteps we
+    take on the path of measurement, while 
+    radians are the hidden jewels revealing 
+    the circle's true essence.\"                             - Unknown
     """    
         )
+        
+    self.play(Write(quote_text), run_time=4)
+    self.wait()
+    self.play(FadeOut(quote_text))
+    
     text1 = Text("Radian?").scale(2)
     dot = Dot().scale(0.2)
     self.play(Write(text1))
