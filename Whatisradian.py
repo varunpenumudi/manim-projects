@@ -1,4 +1,9 @@
 from manim import *
+
+quote = """
+" Degrees are the familiar footsteps we take on the path of measurement, while radians are the hidden jewels revealing the circle's true essence. " 
+                                     - Unknown
+"""
 class WhatIsRadian(Scene):
   def construct(self):
     #intro text
