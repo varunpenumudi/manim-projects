@@ -1,12 +1,13 @@
 from manim import *
 
-quote = """
-" Degrees are the familiar footsteps we take on the path of measurement, while radians are the hidden jewels revealing the circle's true essence. " 
-                                     - Unknown
-"""
+
 class WhatIsRadian(Scene):
   def construct(self):
     #intro text
+    quote_text = Text("""
+    \"Degrees are the familiar footsteps we take on the path of measurement, while radians are the hidden jewels revealing the circle's true essence.\"                             - Unknown
+    """    
+        )
     text1 = Text("Radian?").scale(2)
     dot = Dot().scale(0.2)
     self.play(Write(text1))
