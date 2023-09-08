@@ -10,6 +10,12 @@ class WhatIsRadian(Scene):
     self.wait(2)
     self.play(FadeOut(text1)) 
     
+    # text about angle
+    text2 = Text("angle?").scale(1.5)
+    self.play(Write(text2), run_time=2)
+    self.play(text2.animate.to_edge(UL, buff = 1))
+    self.play(Transform(text2, Text("Angle:").scale(1.5).to_edge(UL, buff=0.8)))
+    
     #creating lines and angles
     line1 = Line(start=ORIGIN, end=3*RIGHT, color=BLUE)
     line2 = line1.copy()
@@ -37,12 +43,6 @@ class WhatIsRadian(Scene):
         mobj.next_to(angle, UR)
 
     value_num.add_updater(valnumUpdater)
-    
-    #adding text about angle
-    text2 = Text("angle?").scale(1.5)
-    self.play(Write(text2))
-    self.play(text2.animate.to_edge(UL, buff = 0.8))
-    self.play(Transform(text2, Text("Angle:").scale(1.5).to_edge(UL, buff=0.8)))
     
     
     # adding lines, angle, dot, value_num and rotate line1
