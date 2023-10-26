@@ -1,9 +1,23 @@
 from manim import *
+from manim.opengl import *
 
+
+class Intro(Scene):
+  def construct(self):
+    text1 = Text("What is Radian?").scale(1.5)
+    dot = Dot().scale(0.2)
+    self.play(Write(text1))
+    self.wait(2)
+    self.play(FadeOut(text1))   
+    
+    text2 = Text("angle?").scale(1.5)
+    self.play(Write(text2), run_time=2)
+    self.play(text2.animate.to_edge(UL))
+    self.play(Transform(text2, Text("Angle:").scale(1.5).to_edge(UL, buff=0.8)))
 
 class WhatIsRadian(Scene):
   def construct(self):
-    #intro text
+    # intro text
     text1 = Text("What is a Radian?").scale(1.5)
     dot = Dot().scale(0.2)
     self.play(Write(text1))
@@ -13,10 +27,10 @@ class WhatIsRadian(Scene):
     # text about angle
     text2 = Text("angle?").scale(1.5)
     self.play(Write(text2), run_time=2)
-    self.play(text2.animate.to_edge(UL, buff = 1))
+    self.play(text2.animate.to_edge(UL))
     self.play(Transform(text2, Text("Angle:").scale(1.5).to_edge(UL, buff=0.8)))
     
-    #creating lines and angles
+    # creating lines and angles
     line1 = Line(start=ORIGIN, end=3*RIGHT, color=BLUE)
     line2 = line1.copy()
     line3 = line1.copy().rotate(-20 * DEGREES, about_point=ORIGIN)
