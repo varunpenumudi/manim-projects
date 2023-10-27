@@ -1,8 +1,7 @@
 from manim import *
 from manim.opengl import *
 
-
-class Intro(Scene):
+class IntroText(Scene):
   def construct(self):
     text1 = Text("What is Radian?").scale(1.5)
     dot = Dot().scale(0.2)
@@ -12,8 +11,10 @@ class Intro(Scene):
     
     text2 = Text("angle?").scale(1.5)
     self.play(Write(text2), run_time=2)
-    self.play(text2.animate.to_edge(UL))
-    self.play(Transform(text2, Text("Angle:").scale(1.5).to_edge(UL, buff=0.8)))
+    self.play(Create(dot))
+    self.wait(3)
+    self.interactive_embed()
+    
 
 class WhatIsRadian(Scene):
   def construct(self):
