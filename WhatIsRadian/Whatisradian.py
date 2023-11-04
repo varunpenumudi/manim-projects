@@ -3,17 +3,43 @@ from manim.opengl import *
 
 class IntroText(Scene):
   def construct(self):
-    text1 = Text("What is Radian?").scale(1.5)
-    dot = Dot().scale(0.2)
+    text1 = Text("Radian అంటే ఏంటి?", font="Noto Sans Telugu").scale(1.5)
     self.play(Write(text1))
     self.wait(2)
     self.play(FadeOut(text1))   
-    
-    text2 = Text("angle?").scale(1.5)
-    self.play(Write(text2), run_time=2)
-    self.play(Create(dot))
-    self.wait(3)
-    self.interactive_embed()
+
+
+class Rotations(Scene):
+  def construct(self):
+    line1 = Line(ORIGIN, 2*RIGHT, color=BLUE)
+    line2 = line1.copy()
+    dot = Dot(radius=0.02)
+    self.play(Create(line1),Create(line2))
+    self.add(dot)
+    self.wait(2)
+
+    fr_text = Text("Full Rotation", font="Sans").next_to(dot, 9*UP)
+    self.play(Rotate(line1,2*PI,about_point=ORIGIN), run_time=3)
+    self.play(Write(fr_text))
+    self.wait()
+    self.play(FadeOut(fr_text))
+
+    hr_text = Text("Half Rotation", font="Sans").next_to(dot,9*UP)
+    self.play(Rotate(line1, PI, about_point=ORIGIN))
+    self.play(Write(hr_text))
+    self.wait()
+    self.play(FadeOut(hr_text), FadeOut(line1))
+
+    rot_text = Text("Rotation?", font="Sans").next_to(dot,9*UP)
+    line1.rotate(PI, about_point=ORIGIN)
+    self.play(FadeIn(line1))
+    self.play(Rotate(line1, PI/6, about_point=ORIGIN))
+    self.play(Write(rot_text))
+    self.wait()
+
+
+
+
     
 
 class WhatIsRadian(Scene):
