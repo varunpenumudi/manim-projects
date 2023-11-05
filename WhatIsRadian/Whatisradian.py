@@ -4,10 +4,27 @@ from manim.opengl import *
 class IntroText(Scene):
   def construct(self):
     text1 = Text("Radian అంటే ఏంటి?", font="Noto Sans Telugu").scale(1.5)
-    self.play(Write(text1))
+    self.wait()
+    self.play(Write(text1), run_time=2)
     self.wait(2)
     self.play(FadeOut(text1))   
 
+class WhyAngles(Scene):
+  def construct(self):
+    text = Text("Angles?")
+    line1 = Line(ORIGIN, 2*RIGHT, color=BLUE)
+    arrow = Arrow(start=1*LEFT,end=1*RIGHT, color=RED)
+    line1.next_to(arrow, RIGHT).shift(1*RIGHT)
+    text.next_to(arrow, LEFT).shift(0.5*LEFT)
+    line2 = line1.copy().rotate(29*DEGREES, about_point=line1.get_start())
+    angle = always_redraw(lambda : Angle(line1, line2)) 
+
+    self.play(Write(text),Create(arrow), run_time=2)
+    self.play(FadeIn(line1), rate_func=rush_into)
+    self.play(FadeIn(line2), Create(angle), lag_ratio=1)
+    self.play(Rotate(line2, PI/1.5, about_point=line1.get_start()), rate_func=rush_from, run_time=0.5)
+    self.play(Rotate(line2, -PI/3, about_point=line1.get_start()), rate_functions=rush_from, run_time=0.5)
+    self.wait()
 
 class Rotations(Scene):
   def construct(self):
@@ -33,10 +50,9 @@ class Rotations(Scene):
     rot_text = Text("Rotation?", font="Sans").next_to(dot,9*UP)
     line1.rotate(PI, about_point=ORIGIN)
     self.play(FadeIn(line1))
-    self.play(Rotate(line1, PI/6, about_point=ORIGIN))
+    self.play(Rotate(line1, PI/6, about_point=ORIGIN), run_time=2)
     self.play(Write(rot_text))
     self.wait()
-
 
 
 
