@@ -1,6 +1,7 @@
 from manim import *
 from manim.opengl import *
-
+DEFAULT_STROKE_WIDTH=2
+#Scene1
 class IntroText(Scene):
   def construct(self):
     text1 = Text("Radian అంటే ఏంటి?", font="Noto Sans Telugu").scale(1.5)
@@ -9,6 +10,7 @@ class IntroText(Scene):
     self.wait(2)
     self.play(FadeOut(text1))   
 
+#Scene2
 class WhyAngles(Scene):
   def construct(self):
     text = Text("Angles?")
@@ -26,6 +28,7 @@ class WhyAngles(Scene):
     self.play(Rotate(line2, -PI/3, about_point=line1.get_start()), rate_functions=rush_from, run_time=0.5)
     self.wait()
 
+#Scene3
 class Rotations(Scene):
   def construct(self):
     line1 = Line(ORIGIN, 2*RIGHT, color=BLUE)
@@ -55,8 +58,51 @@ class Rotations(Scene):
     self.wait()
 
 
+#Scene4
+class Degrees(Scene):
+  def construct(self):
+    line1 = Line(ORIGIN, 2*RIGHT, color=BLUE)
+    line2 = line1.copy().rotate(PI/12, about_point=line1.get_start())
+    circle = Circle(radius=2, color=BLUE)
+    angle = always_redraw(lambda : Angle(line1, line2, color=GOLD_A))
+    dot = Dot().scale(0.4)
 
-    
+    # Decimal number for angle value
+    ang_val = DecimalNumber(angle.get_value(degrees=True),num_decimal_places=0, unit="^{\circ}").scale(0.5)
+    ang_val.next_to(line1, UP).shift(0.5*RIGHT)
+    def angval_updater(mobj):
+      ang = (line2.get_angle()-line1.get_angle())/DEGREES
+      if ang < 0:
+        ang = 360+ang
+      mobj.set_value(ang)
+      mobj.next_to(angle, UR, buff=0.01)
+    ang_val.add_updater(angval_updater)
+
+    self.play(Write(circle))
+    self.play(Write(line1), Write(line2), FadeIn(dot), lag_ratio=0)
+    self.play(Write(angle), Write(ang_val))
+    self.play(Rotate(line2,PI/4,about_point=line2.get_start()), run_time=2)
+    self.play(Rotate(line2,PI,about_point=line2.get_start()), run_time=1)
+    self.play(Rotate(line2,-PI/1.9,about_point=line2.get_start()), run_time=1)
+
+    text = Text("Degrees", font="Sans")
+    text.to_edge(UP)
+    self.play(Write(text))
+    self.play(Rotate(line2, -145*DEGREES, about_point=line2.get_start()))
+    self.play(Rotate(line2, 359.6*DEGREES, about_point=line2.get_start()), run_time=3)
+    self.wait(3)
+    self.wait()
+
+    #points on circle
+    points = [circle.point_at_angle(i*DEGREES) for i in range(1,361)]
+    lines_group = VGroup(*[Line(ORIGIN, 0.1*RIGHT, stroke_width=1.5, color=RED_E).move_to(p).rotate((i+1)*DEGREES) for i,p in enumerate(points)])
+    self.play(Write(lines_group))
+    self.play(FadeOut(lines_group[1:][:-1]))
+    self.play(Indicate(lines_group[0]))
+
+    self.play(Rotate(line2, 1.4*DEGREES, about_point=line2.get_start()))
+    self.wait(3)
+
 
 class WhatIsRadian(Scene):
   def construct(self):
